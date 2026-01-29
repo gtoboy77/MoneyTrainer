@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종합 자산 모니터링</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #ffffff;
+            /* Unified to white */
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            padding: 1rem 0;
+            /* Reduced padding */
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            /* Reduced font size 2.5->1.25 */
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1800px;
+            margin: 1rem auto;
+            flex: 1;
+            display: flex;
+            /* Changed from default to flex column */
+            flex-direction: column;
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            /* Horizontal scroll ONLY here */
+            width: 100%;
+            padding-bottom: 2rem;
+            /* display: flex; REMOVED to avoid flex conflict with max-content grid */
+        }
+
+        .grid-layout {
+            display: flex;
+            /* Flex row */
+            flex-wrap: nowrap;
+            /* No wrapping */
+            gap: 1.5rem;
+            width: max-content;
+            /* Ensure container grows */
+            padding: 0 1rem;
+            min-height: 200px;
+            /* Ensure visibility */
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            width: 600px;
+            /* Fixed width for horizontal items */
+            min-width: 600px;
+            height: auto;
+            /* Fallback to auto if flex is tricky */
+            max-height: 80vh;
+            /* Limit height */
+        }
+
+        .card-header {
+            padding: 0.75rem;
+            /* Reduced padding */
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1rem;
+            /* Reduced font size */
+            color: var(--text-primary);
+        }
+
+        .loader {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-msg {
+            color: #ef4444;
+            padding: 1rem;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .table-container {
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.75rem;
+            /* Reduced base font size */
+        }
+
+        th,
+        td {
+            padding: 0.35rem 0.5rem;
+            /* Reduced padding for half height */
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            /* Reduced header font size */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        tr {
+            transition: background 0.2s;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .weight-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+            width: 80px;
+        }
+
+        .weight-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            border-radius: 2px;
+        }
+
+        .refresh-btn {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            transition: all 0.2s;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>종합 자산 모니터링 <span style="font-size: 0.6em; opacity: 0.7;">v1.2</span></h1>
+        <p id="status-line" style="color: var(--text-primary); margin-top: 0.5rem;">Real-time Constituent Holdings</p>
+    </header>
+
+    <div class="container">
+        <div style="text-align: right;">
+            <button class="refresh-btn" onclick="fetchData()">Refresh Data</button>
+        </div>
+
+        <!-- Total Portfolio Section (Vertical, Full Height) -->
+        <div id="total-section" style="display: flex; justify-content: center; margin-bottom: 2rem;"></div>
+
+        <!-- ETF Grid Section (Horizontal Scroll) -->
+        <div class="scroll-container">
+            <div id="grid" class="grid-layout">
+                <div id="loading" class="loader">
+                    <div class="spinner"></div>
+                    <p>Fetching real-time data from ETF providers...</p>
+                    <small style="color: var(--text-primary); margin-top: 0.5rem;">Connecting to ACE and
+                        TIGER...</small>
+                </div>
+                <div id="error" class="error-msg" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const grid = document.getElementById('grid');
+            const totalSection = document.getElementById('total-section');
+            const statusLine = document.getElementById('status-line');
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+
+            // Reset UI for refresh
+            grid.innerHTML = '';
+            totalSection.innerHTML = ''; // Clear total section
+            grid.appendChild(loading);
+            grid.appendChild(error); // Keep error hidden
+
+            loading.style.display = 'flex';
+            error.style.display = 'none';
+            statusLine.textContent = "Fetching data...";
+
+            try {
+                const response = await fetch('/api/constituents');
+                const result = await response.json();
+
+                // Remove loader
+                loading.style.display = 'none';
+
+                if (result.success) {
+                    statusLine.textContent = `Rendering ${result.data.length} items...`;
+
+                    // --- Aggregation Logic Start ---
+                    const aggregates = {};
+                    let globalTotal = 0;
+
+                    result.data.forEach(etf => {
+                        const components = etf.components || [];
+                        components.forEach(item => {
+                            let code = item.code;
+                            let name = item.name;
+                            const amountStr = item.amount;
+                            if (!amountStr || amountStr === '-') return;
+
+                            // Parse "1,234,567원" -> 1234567
+                            const amount = parseInt(amountStr.replace(/[^0-9]/g, ''), 10);
+                            if (isNaN(amount)) return;
+
+                            // Special Aggregation for "국고채권" & US Treasuries (T 4, T 3) & TIGER 중장기국채
+                            const codeTrimmed = code.trim();
+                            const nameLower = name.toLowerCase();
+
+                            if (codeTrimmed.includes('국고채권') || codeTrimmed.startsWith('T 4') || codeTrimmed.startsWith('T 3') || name.includes('TIGER') && name.includes('국채')) {
+                                code = '채권';
+                                name = '채권 통합 (Bond Aggregated)';
+                            }
+                            // Special Aggregation for GOOGL (Alphabet Inc.)
+                            else if (codeTrimmed === 'GOOGL' || codeTrimmed === 'GOOG' || nameLower.includes('alphabet') || nameLower.includes('google')) {
+                                code = 'GOOGL';
+                                name = 'Alphabet Inc. (GOOGL 합산)';
+                            }
+
+                            if (!aggregates[code]) {
+                                aggregates[code] = {
+                                    code: code,
+                                    name: name,
+                                    totalAmount: 0
+                                };
+                            }
+                            aggregates[code].totalAmount += amount;
+                            globalTotal += amount;
+                        });
+                    });
+
+                    // Sort by total amount desc
+                    const sortedAggregates = Object.values(aggregates).sort((a, b) => b.totalAmount - a.totalAmount);
+
+                    if (sortedAggregates.length > 0) {
+                        const totalCard = document.createElement('div');
+                        totalCard.className = 'card';
+                        totalCard.style.border = '1px solid var(--accent)';
+                        totalCard.style.height = 'auto';
+                        totalCard.style.maxHeight = 'none';
+                        totalCard.style.width = '100%';
+                        totalCard.style.maxWidth = '1400px';
+                        totalCard.style.minWidth = 'auto';
+
+                        // Split into left (first 33) and right (rest) columns
+                        const leftItems = sortedAggregates.slice(0, 33);
+                        const rightItems = sortedAggregates.slice(33);
+
+                        const generateRows = (items, startIndex) => items.map((item, idx) => {
+                            const index = startIndex + idx;
+                            const weight = globalTotal > 0 ? ((item.totalAmount / globalTotal) * 100).toFixed(2) : '0';
+                            const amountStr = item.totalAmount.toLocaleString('ko-KR') + "원";
+                            return `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td><span class="tag" style="background: rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.4); color: #fff;">${item.code}</span></td>
+                                    <td style="font-weight: 500;">${item.name}</td>
+                                    <td>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span>${weight}%</span>
+                                            <span style="color: var(--text-primary); font-size: 0.85em; font-weight: bold;">${amountStr}</span>
+                                        </div>
+                                        <div class="weight-bar">
+                                            <div class="weight-fill" style="width: ${Math.min(parseFloat(weight) * 5, 100)}%; background: linear-gradient(90deg, #8b5cf6, #d946ef);"></div>
+                                        </div>
+                                    </td>
+                                </tr>`;
+                        }).join('');
+
+                        const leftRowsHtml = generateRows(leftItems, 0);
+                        const rightRowsHtml = generateRows(rightItems, 33);
+
+                        const tableTemplate = (rows) => `
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px;">No</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th style="width: 200px;">Weight / Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${rows}</tbody>
+                            </table>`;
+
+                        // Calculate category ratios
+                        const realEstateAmount = aggregates['부동산']?.totalAmount || 0;
+                        const cashAmount = aggregates['원화현금']?.totalAmount || 0;
+                        const financialAmount = globalTotal - realEstateAmount - cashAmount;
+
+                        const realEstateRatio = globalTotal > 0 ? ((realEstateAmount / globalTotal) * 100).toFixed(1) : '0';
+                        const cashRatio = globalTotal > 0 ? ((cashAmount / globalTotal) * 100).toFixed(1) : '0';
+                        const financialRatio = globalTotal > 0 ? ((financialAmount / globalTotal) * 100).toFixed(1) : '0';
+
+                        totalCard.innerHTML = `
+                            <div class="card-header" style="background: rgba(139, 92, 246, 0.1);">
+                                <h2>🔥 Total Portfolio <span style="font-size: 0.8em; color: var(--accent);">(${globalTotal.toLocaleString('ko-KR')}원)</span></h2>
+                                <div style="font-size: 0.85em; margin-top: 0.3rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                    <span style="color: #f59e0b;">🏠 부동산: <strong>${realEstateRatio}%</strong> (${realEstateAmount.toLocaleString('ko-KR')}원)</span>
+                                    <span style="color: #10b981;">💰 금융자산: <strong>${financialRatio}%</strong> (${financialAmount.toLocaleString('ko-KR')}원)</span>
+                                    <span style="color: #60a5fa;">💵 원화현금: <strong>${cashRatio}%</strong> (${cashAmount.toLocaleString('ko-KR')}원)</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; padding: 0.5rem;">
+                                <div class="table-container" style="flex: 1;">
+                                    ${tableTemplate(leftRowsHtml)}
+                                </div>
+                                ${rightItems.length > 0 ? `
+                                <div class="table-container" style="flex: 1;">
+                                    ${tableTemplate(rightRowsHtml)}
+                                </div>` : ''}
+                            </div>
+                        `;
+                        // Append to the dedicated Total Section
+                        totalSection.appendChild(totalCard);
+                    }
+                    // --- Aggregation Logic End ---
+
+                    result.data.forEach(etf => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+
+                        const rows = (etf.components || []).map(item => `
+                            <tr>
+                                <td>${item.no}</td>
+                                <td><span class="tag">${item.code}</span></td>
+                                <td style="font-weight: 500;">
+                                    ${item.name}
+                                </td>
+                                <td>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span>${item.weight}%</span>
+                                        <span style="color: var(--text-primary); font-size: 0.85em;">${item.amount !== '-' ? item.amount : ''}</span>
+                                    </div>
+                                    <div class="weight-bar">
+                                        <div class="weight-fill" style="width: ${Math.min(parseFloat(item.weight) * 5, 100)}%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('');
+
+                        card.innerHTML = `
+                            <div class="card-header">
+                                <h2>${etf.title}</h2>
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px;">No</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th style="width: 250px;">Weight / Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${rows}
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+
+                    statusLine.textContent = `Completed: ${result.data.length} items loaded.`;
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (err) {
+                loading.style.display = 'none';
+                error.textContent = 'Failed to load data: ' + err.message;
+                error.style.display = 'block';
+                grid.appendChild(error);
+                statusLine.textContent = "Error occurred.";
+            }
+        }
+
+        // Initial load
+        window.addEventListener('DOMContentLoaded', fetchData);
+    </script>
+</body>
+
+</html>
