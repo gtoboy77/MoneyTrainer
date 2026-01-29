@@ -1,8 +1,9 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const chromium = require('@sparticuz/chromium');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -335,8 +336,10 @@ const scrapers = {
 
 app.get('/api/constituents', async (req, res) => {
     const browser = await puppeteer.launch({
-        headless: "new",
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless
     });
 
     try {
