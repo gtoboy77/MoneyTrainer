@@ -334,10 +334,15 @@ const scrapers = {
 };
 
 app.get('/api/constituents', async (req, res) => {
-    const browser = await puppeteer.launch({
+    const launchOptions = {
         headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    };
+    // Use system Chromium if available (Docker environment)
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+        launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    }
+    const browser = await puppeteer.launch(launchOptions);
 
     try {
         // Perform Helper Login First
