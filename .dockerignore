@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+.idea/
+.vscode/
+*.swp
+*.swo
+dist/
+build/
