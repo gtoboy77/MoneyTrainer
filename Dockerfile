@@ -12,19 +12,24 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
+# Create app directory and set permissions
 WORKDIR /app
+RUN chown -R node:node /app
 
-# Copy package files
-COPY package*.json ./
+# Switch to non-root user
+USER node
 
-# Install dependencies (skip Chromium download since we installed it above)
+# Copy package files with correct ownership
+COPY --chown=node:node package*.json ./
+
+# Install dependencies
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-RUN npm install
+RUN npm install --production
 
 # Copy application code
-COPY . .
+COPY --chown=node:node . .
 
 # Expose port
 EXPOSE 3000
