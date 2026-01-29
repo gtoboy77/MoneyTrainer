@@ -1,9 +1,17 @@
 const express = require('express');
-const puppeteer = require('puppeteer-core');
-const chromium = require('@sparticuz/chromium');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Detect environment and load appropriate puppeteer
+const isVercel = process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME;
+let puppeteer, chromium;
+if (isVercel) {
+    puppeteer = require('puppeteer-core');
+    chromium = require('@sparticuz/chromium');
+} else {
+    puppeteer = require('puppeteer');
+}
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -335,12 +343,20 @@ const scrapers = {
 };
 
 app.get('/api/constituents', async (req, res) => {
-    const browser = await puppeteer.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless
-    });
+    let browser;
+    if (isVercel) {
+        browser = await puppeteer.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless
+        });
+    } else {
+        browser = await puppeteer.launch({
+            headless: 'new',
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+    }
 
     try {
         // Perform Helper Login First
