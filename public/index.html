@@ -248,6 +248,9 @@
     <header>
         <h1>종합 자산 모니터링 <span style="font-size: 0.6em; opacity: 0.7;">v1.2</span></h1>
         <p id="status-line" style="color: var(--text-primary); margin-top: 0.5rem;">Real-time Constituent Holdings</p>
+        <nav style="margin-top: 0.8rem; display: flex; gap: 1rem; justify-content: center;">
+            <a href="/living.html" style="color: #fff; text-decoration: none; padding: 0.5rem 1.2rem; background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%); border-radius: 10px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 4px 12px rgba(56,189,248,0.3);">생활비 관리</a>
+        </nav>
     </header>
 
     <div class="container">
@@ -320,7 +323,9 @@
                             const codeTrimmed = code.trim();
                             const nameLower = name.toLowerCase();
 
-                            if (codeTrimmed.includes('국고채권') || codeTrimmed.startsWith('T 4') || codeTrimmed.startsWith('T 3') || name.includes('TIGER') && name.includes('국채')) {
+                            const hasDate = /\d{4}[.\-\/]\d{2}[.\-\/]?\d{0,2}/.test(name) || /\d{2}[.\-\/]\d{2}[.\-\/]\d{2,4}/.test(name) || /\d{8}/.test(name) || /(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\d{2}/i.test(name);
+                            const hasGovt = nameLower.includes('government');
+                            if (hasDate || hasGovt || codeTrimmed.startsWith('국고') || name.startsWith('국고') || codeTrimmed.startsWith('T 4') || codeTrimmed.startsWith('T 3') || name.includes('TIGER') && name.includes('국채')) {
                                 code = '채권';
                                 name = '채권 통합 (Bond Aggregated)';
                             }
@@ -352,12 +357,16 @@
                         totalCard.style.height = 'auto';
                         totalCard.style.maxHeight = 'none';
                         totalCard.style.width = '100%';
-                        totalCard.style.maxWidth = '1400px';
                         totalCard.style.minWidth = 'auto';
+                        totalCard.style.overflow = 'visible';
 
-                        // Split into left (first 33) and right (rest) columns
-                        const leftItems = sortedAggregates.slice(0, 33);
-                        const rightItems = sortedAggregates.slice(33);
+                        // Split into columns of 33 items each
+                        const ITEMS_PER_COL = 33;
+                        const columns = [];
+                        for (let i = 0; i < sortedAggregates.length; i += ITEMS_PER_COL) {
+                            columns.push(sortedAggregates.slice(i, i + ITEMS_PER_COL));
+                        }
+                        totalCard.style.maxWidth = '100%';
 
                         const generateRows = (items, startIndex) => items.map((item, idx) => {
                             const index = startIndex + idx;
@@ -380,9 +389,6 @@
                                 </tr>`;
                         }).join('');
 
-                        const leftRowsHtml = generateRows(leftItems, 0);
-                        const rightRowsHtml = generateRows(rightItems, 33);
-
                         const tableTemplate = (rows) => `
                             <table style="width: 100%;">
                                 <thead>
@@ -396,32 +402,55 @@
                                 <tbody>${rows}</tbody>
                             </table>`;
 
-                        // Calculate category ratios
-                        const realEstateAmount = aggregates['부동산']?.totalAmount || 0;
-                        const cashAmount = aggregates['원화현금']?.totalAmount || 0;
-                        const financialAmount = globalTotal - realEstateAmount - cashAmount;
+                        const columnsHtml = columns.map((colItems, colIdx) => {
+                            const rowsHtml = generateRows(colItems, colIdx * ITEMS_PER_COL);
+                            return `<div class="table-container" style="min-width: 650px; flex: 0 0 650px;">${tableTemplate(rowsHtml)}</div>`;
+                        }).join('');
 
-                        const realEstateRatio = globalTotal > 0 ? ((realEstateAmount / globalTotal) * 100).toFixed(1) : '0';
+                        // Calculate category ratios
+                        const bondAmount = aggregates['채권']?.totalAmount || 0;
+                        const savingsAmount = aggregates['예적금']?.totalAmount || 0;
+                        const cashAmount = aggregates['원화현금']?.totalAmount || 0;
+                        const stockAmount = globalTotal - bondAmount - savingsAmount - cashAmount;
+
+                        const stockRatio = globalTotal > 0 ? ((stockAmount / globalTotal) * 100).toFixed(1) : '0';
+                        const bondRatio = globalTotal > 0 ? ((bondAmount / globalTotal) * 100).toFixed(1) : '0';
+                        const savingsRatio = globalTotal > 0 ? ((savingsAmount / globalTotal) * 100).toFixed(1) : '0';
                         const cashRatio = globalTotal > 0 ? ((cashAmount / globalTotal) * 100).toFixed(1) : '0';
-                        const financialRatio = globalTotal > 0 ? ((financialAmount / globalTotal) * 100).toFixed(1) : '0';
+
+                        const s1 = parseFloat(stockRatio);
+                        const s2 = s1 + parseFloat(bondRatio);
+                        const s3 = s2 + parseFloat(savingsRatio);
 
                         totalCard.innerHTML = `
                             <div class="card-header" style="background: rgba(139, 92, 246, 0.1);">
                                 <h2>🔥 Total Portfolio <span style="font-size: 0.8em; color: var(--accent);">(${globalTotal.toLocaleString('ko-KR')}원)</span></h2>
-                                <div style="font-size: 0.85em; margin-top: 0.3rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
-                                    <span style="color: #f59e0b;">🏠 부동산: <strong>${realEstateRatio}%</strong> (${realEstateAmount.toLocaleString('ko-KR')}원)</span>
-                                    <span style="color: #10b981;">💰 금융자산: <strong>${financialRatio}%</strong> (${financialAmount.toLocaleString('ko-KR')}원)</span>
-                                    <span style="color: #60a5fa;">💵 원화현금: <strong>${cashRatio}%</strong> (${cashAmount.toLocaleString('ko-KR')}원)</span>
+                                <div style="display: flex; align-items: center; gap: 1.5rem; margin-top: 0.5rem;">
+                                    <div style="width: 180px; height: 180px; border-radius: 50%; flex-shrink: 0; background: conic-gradient(#10b981 0% ${s1}%, #f59e0b ${s1}% ${s2}%, #a78bfa ${s2}% ${s3}%, #60a5fa ${s3}% 100%); position: relative;">
+                                        ${[
+                                            {label: '주식', ratio: stockRatio, start: 0, end: s1, color: '#fff'},
+                                            {label: '채권', ratio: bondRatio, start: s1, end: s2, color: '#fff'},
+                                            {label: '예적금', ratio: savingsRatio, start: s2, end: s3, color: '#fff'},
+                                            {label: '현금', ratio: cashRatio, start: s3, end: 100, color: '#fff'}
+                                        ].filter(s => (s.end - s.start) >= 3).map(s => {
+                                            const midAngle = ((s.start + s.end) / 2 / 100) * 360 - 90;
+                                            const rad = midAngle * Math.PI / 180;
+                                            const r = 55;
+                                            const x = 90 + r * Math.cos(rad);
+                                            const y = 90 + r * Math.sin(rad);
+                                            return '<div style="position:absolute;left:' + x + 'px;top:' + y + 'px;transform:translate(-50%,-50%);font-size:0.55em;font-weight:bold;color:' + s.color + ';text-shadow:0 0 3px rgba(0,0,0,0.7);white-space:nowrap;pointer-events:none;">' + s.label + '<br>' + s.ratio + '%</div>';
+                                        }).join('')}
+                                    </div>
+                                    <div style="font-size: 0.85em; display: flex; flex-direction: column; gap: 0.4rem;">
+                                        <span style="color: #10b981;">&#9632; 주식: <strong>${stockRatio}%</strong> (${stockAmount.toLocaleString('ko-KR')}원)</span>
+                                        <span style="color: #f59e0b;">&#9632; 채권: <strong>${bondRatio}%</strong> (${bondAmount.toLocaleString('ko-KR')}원)</span>
+                                        <span style="color: #a78bfa;">&#9632; 예적금: <strong>${savingsRatio}%</strong> (${savingsAmount.toLocaleString('ko-KR')}원)</span>
+                                        <span style="color: #60a5fa;">&#9632; 현금: <strong>${cashRatio}%</strong> (${cashAmount.toLocaleString('ko-KR')}원)</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div style="display: flex; gap: 1rem; padding: 0.5rem;">
-                                <div class="table-container" style="flex: 1;">
-                                    ${tableTemplate(leftRowsHtml)}
-                                </div>
-                                ${rightItems.length > 0 ? `
-                                <div class="table-container" style="flex: 1;">
-                                    ${tableTemplate(rightRowsHtml)}
-                                </div>` : ''}
+                            <div style="display: flex; flex-wrap: nowrap; gap: 1rem; padding: 0.5rem; overflow-x: auto;">
+                                ${columnsHtml}
                             </div>
                         `;
                         // Append to the dedicated Total Section

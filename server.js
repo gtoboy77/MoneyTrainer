@@ -1,12 +1,16 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
 const path = require('path');
+const fs = require('fs');
 const XLSX = require('xlsx');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const DATA_DIR = path.join(__dirname, 'data');
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
 app.use(express.static('public'));
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 // Scrapers
 // Helper to perform login once
@@ -80,6 +84,21 @@ async function scrapeEtfCheck(page, url, id, totalAmount = 0, maxItems = 0) {
         });
         await new Promise(r => setTimeout(r, 2000));
 
+        // Click "모두 보기" button to load all holdings
+        try {
+            const viewAllBtn = await page.evaluateHandle(() => {
+                const buttons = Array.from(document.querySelectorAll('a, button, span'));
+                return buttons.find(b => b.innerText && b.innerText.trim().includes('모두 보기'));
+            });
+            if (viewAllBtn && viewAllBtn.asElement()) {
+                await viewAllBtn.click();
+                console.log(`[${id}] Clicked "모두 보기" button`);
+                await new Promise(r => setTimeout(r, 3000));
+            }
+        } catch (e) {
+            console.log(`[${id}] No "모두 보기" button found`);
+        }
+
     } catch (e) {
         console.log(`[${id}] Error:`, e.message);
     }
@@ -96,13 +115,11 @@ async function scrapeEtfCheck(page, url, id, totalAmount = 0, maxItems = 0) {
     // Default Titles
     const defaults = {
         'ace': "ACE 구글밸류체인액티브",
+        'ace_nvidia': "ACE NVIDIA30블렌드블룸버그",
         'tiger': "TIGER미국테크TOP10채권혼합",
         'kodex': "KODEX 미국성장커버드콜액티브",
         'wisdomtree': "WisdomTree U.S. Quality Dividend Growth Fund (DGRW)",
-        'etf_hx77': "Neos Nasdaq 100 High Income ETF (QQQI)",
         'etf_mve2': "Schwab U.S. Dividend Equity ETF (SCHD)",
-        'etf_mqes': "Neos S&P 500 High Income ETF (QDVO)",
-        'etf_vr1y': "Invesco S&P 500 Momentum ETF (SPMO)",
         'sol_mix': "SOL 미국배당채권혼합50"
     };
     if (defaults[id]) title = defaults[id];
@@ -183,20 +200,24 @@ async function fetchTotalAmount(cell, sheetName = '계좌정보') {
 // Scrapers
 const scrapers = {
     ace: async (page) => {
-        const total = await fetchTotalAmount('D26');
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/483340/compose', 'ace', total, 15);
+        const total = await fetchTotalAmount('D23');
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/483340/compose', 'ace', total);
+    },
+    ace_nvidia: async (page) => {
+        const total = await fetchTotalAmount('D28'); // ACE NVIDIA30
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/448540/compose', 'ace_nvidia', total);
     },
     tiger: async (page) => {
-        const total = await fetchTotalAmount('D22');
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/472170/compose', 'tiger', total, 15);
+        const total = await fetchTotalAmount('D19');
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/472170/compose', 'tiger', total);
     },
     kodex: async (page) => {
-        const total = await fetchTotalAmount('D28');
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/0144L0/compose', 'kodex', total, 15);
+        const total = await fetchTotalAmount('D25');
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/0144L0/compose', 'kodex', total);
     },
     capital: async (page) => {
         console.log("[Capital] Downloading Excel...");
-        const totalAmount = await fetchTotalAmount('D41'); // CGDV
+        const totalAmount = await fetchTotalAmount('D38'); // CGDV
 
         let title = "Capital Group Dividend Value ETF (CGDV)";
         let data = [];
@@ -336,31 +357,19 @@ const scrapers = {
         return { id: 'capital', title, components: data };
     },
     wisdomtree: async (page) => {
-        const total = await fetchTotalAmount('D39'); // DGRW
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00000PMNI/compose#top', 'wisdomtree', total, 15);
-    },
-    etf_hx77: async (page) => {
-        const total = await fetchTotalAmount('D45'); // QQQI
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00001HX77/compose', 'etf_hx77', total, 15);
+        const total = await fetchTotalAmount('D36'); // DGRW
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00000PMNI/compose#top', 'wisdomtree', total);
     },
     etf_mve2: async (page) => {
-        const total = await fetchTotalAmount('D37'); // SCHD (Updated to D37)
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00000MVE2/compose', 'etf_mve2', total, 15);
-    },
-    etf_mqes: async (page) => {
-        const total = await fetchTotalAmount('D47'); // QDVO
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00001MQES/compose', 'etf_mqes', total, 15);
-    },
-    etf_vr1y: async (page) => {
-        const total = await fetchTotalAmount('D43'); // SPMO
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00000VR1Y/compose', 'etf_vr1y', total, 15);
+        const total = await fetchTotalAmount('D34'); // SCHD
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/global/etpitem/F00000MVE2/compose', 'etf_mve2', total);
     },
     sol_mix: async (page) => {
-        const total = await fetchTotalAmount('D35'); // SOL Mix
-        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/490490/compose', 'sol_mix', total, 15);
+        const total = await fetchTotalAmount('D32'); // SOL Mix
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/490490/compose', 'sol_mix', total);
     },
     custom_googl: async (page) => {
-        const total = await fetchTotalAmount('D49'); // GOOGL Direct
+        const total = await fetchTotalAmount('D40'); // GOOGL Direct
         const amountStr = total > 0 ? total.toLocaleString('ko-KR') + "원" : "-";
         return {
             id: 'custom_googl',
@@ -374,67 +383,63 @@ const scrapers = {
             }]
         };
     },
-    custom_bonds_extra: async (page) => {
-        const val1 = await fetchTotalAmount('D66');
-        const val2 = await fetchTotalAmount('D51');
+    custom_bonds: async (page) => {
+        const val1 = await fetchTotalAmount('D60');
+        const val2 = await fetchTotalAmount('D42');
         const total = val1 + val2;
         const amountStr = total > 0 ? total.toLocaleString('ko-KR') + "원" : "-";
         return {
-            id: 'custom_bonds_extra',
-            title: 'Additional Bonds (D66+D51)',
+            id: 'custom_bonds',
+            title: 'Bonds (D60+D42)',
             components: [{
                 no: '1',
-                code: '국고채권 기타', // "국고채권" keyword ensures aggregation to "채권"
-                name: 'Korea Treasury Bond (D66+D51)',
+                code: '국고채권',
+                name: 'Korea Treasury Bond (D60+D42)',
                 weight: '100',
                 amount: amountStr
             }]
         };
     },
-    custom_reits: async (page) => {
-        const val1 = await fetchTotalAmount('D15');
-        const val2 = await fetchTotalAmount('D19');
-        const total = val1 + val2;
+    custom_savings: async (page) => {
+        const total = await fetchTotalAmount('D61');
         const amountStr = total > 0 ? total.toLocaleString('ko-KR') + "원" : "-";
         return {
-            id: 'custom_reits',
-            title: 'REITs Aggregated (D15+D19)',
+            id: 'custom_savings',
+            title: 'Savings (D61)',
             components: [{
                 no: '1',
-                code: '리츠',
-                name: 'Real Estate Investment Trusts (Aggregated)',
+                code: '예적금',
+                name: 'Savings & Deposits (D61)',
                 weight: '100',
                 amount: amountStr
             }]
         };
     },
     custom_cash: async (page) => {
-        const val1 = await fetchTotalAmount('E4', '26년01월'); // Existing
-        const val2 = await fetchTotalAmount('C11', '26년01월'); // Added C11
-        const total = val1 + val2;
+        const total = await fetchTotalAmount('D62');
         const amountStr = total > 0 ? total.toLocaleString('ko-KR') + "원" : "-";
         return {
             id: 'custom_cash',
-            title: 'KRW Cash (26년01월!E4+C11)',
+            title: 'KRW Cash (D62)',
             components: [{
                 no: '1',
                 code: '원화현금',
-                name: 'KRW Cash',
+                name: 'KRW Cash (D62)',
                 weight: '100',
                 amount: amountStr
             }]
         };
     },
-    custom_real_estate: async (page) => {
-        const total = await fetchTotalAmount('G23', '26년01월'); // Real Estate
+    custom_reits: async (page) => {
+        const total = await fetchTotalAmount('D16');
         const amountStr = total > 0 ? total.toLocaleString('ko-KR') + "원" : "-";
         return {
-            id: 'custom_real_estate',
-            title: 'Real Estate (26년01월!G23)',
+            id: 'custom_reits',
+            title: 'REITs (D16)',
             components: [{
                 no: '1',
-                code: '부동산',
-                name: 'Real Estate',
+                code: '리츠',
+                name: 'Real Estate Investment Trusts',
                 weight: '100',
                 amount: amountStr
             }]
@@ -485,19 +490,17 @@ app.get('/api/constituents', async (req, res) => {
         console.log("Starting parallel scrapes...");
         const results = await Promise.all([
             runScraper(scrapers.ace, "ACE"),
+            runScraper(scrapers.ace_nvidia, "ACE_NVIDIA"),
             runScraper(scrapers.tiger, "Tiger"),
             runScraper(scrapers.kodex, "Kodex"),
             runScraper(scrapers.capital, "Capital"),
             runScraper(scrapers.wisdomtree, "WisdomTree"),
-            runScraper(scrapers.etf_hx77, "ETF_HX77"),
             runScraper(scrapers.etf_mve2, "ETF_MVE2"),
-            runScraper(scrapers.etf_mqes, "ETF_MQES"),
-            runScraper(scrapers.etf_vr1y, "ETF_VR1Y"),
             runScraper(scrapers.sol_mix, "SOL_MIX"),
-            runScraper(scrapers.custom_bonds_extra, "CUSTOM_BONDS_EXTRA"),
-            runScraper(scrapers.custom_reits, "CUSTOM_REITS"),
+            runScraper(scrapers.custom_bonds, "CUSTOM_BONDS"),
+            runScraper(scrapers.custom_savings, "CUSTOM_SAVINGS"),
             runScraper(scrapers.custom_cash, "CUSTOM_CASH"),
-            runScraper(scrapers.custom_real_estate, "CUSTOM_REAL_ESTATE"),
+            runScraper(scrapers.custom_reits, "CUSTOM_REITS"),
             runScraper(scrapers.custom_googl, "CUSTOM_GOOGL")
         ]);
 
@@ -516,6 +519,83 @@ app.get('/api/constituents', async (req, res) => {
     } finally {
         await browser.close().catch(e => console.error("Error closing browser:", e));
     }
+});
+
+// ===== Living Expenses API =====
+const LIVING_TX_FILE = path.join(DATA_DIR, 'living_transactions.json');
+const LIVING_OV_FILE = path.join(DATA_DIR, 'living_overrides.json');
+
+function readJsonFile(filePath, fallback) {
+    try {
+        if (fs.existsSync(filePath)) return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    } catch (e) { console.error('Read error:', filePath, e.message); }
+    return fallback;
+}
+function writeJsonFile(filePath, data) {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+}
+
+// Load all transactions
+app.get('/api/living/transactions', (req, res) => {
+    res.json(readJsonFile(LIVING_TX_FILE, []));
+});
+
+// Save transactions (full replace)
+app.post('/api/living/transactions', (req, res) => {
+    const txs = req.body;
+    if (!Array.isArray(txs)) return res.status(400).json({ error: 'Array expected' });
+    writeJsonFile(LIVING_TX_FILE, txs);
+    res.json({ success: true, count: txs.length });
+});
+
+// Load overrides
+app.get('/api/living/overrides', (req, res) => {
+    res.json(readJsonFile(LIVING_OV_FILE, {}));
+});
+
+// Save overrides
+app.post('/api/living/overrides', (req, res) => {
+    const ov = req.body;
+    writeJsonFile(LIVING_OV_FILE, ov);
+    res.json({ success: true });
+});
+
+// ===== Living Snapshots API =====
+const SAVES_DIR = path.join(DATA_DIR, 'living_saves');
+if (!fs.existsSync(SAVES_DIR)) fs.mkdirSync(SAVES_DIR, { recursive: true });
+
+// List saved snapshots
+app.get('/api/living/saves', (req, res) => {
+    const files = fs.readdirSync(SAVES_DIR).filter(f => f.endsWith('.json'));
+    const saves = files.map(f => {
+        const data = readJsonFile(path.join(SAVES_DIR, f), {});
+        return { name: data.name || f.replace('.json', ''), file: f.replace('.json', ''), date: data.savedAt || '', count: (data.transactions || []).length };
+    }).sort((a, b) => b.name.localeCompare(a.name));
+    res.json(saves);
+});
+
+// Save a snapshot
+app.post('/api/living/saves', (req, res) => {
+    const { name, transactions, overrides } = req.body;
+    if (!name) return res.status(400).json({ error: 'name required' });
+    const safeFile = name.replace(/[^a-zA-Z0-9가-힣_\-]/g, '_');
+    const filePath = path.join(SAVES_DIR, safeFile + '.json');
+    writeJsonFile(filePath, { name, transactions: transactions || [], overrides: overrides || {}, savedAt: new Date().toISOString() });
+    res.json({ success: true, name });
+});
+
+// Load a snapshot
+app.get('/api/living/saves/:file', (req, res) => {
+    const filePath = path.join(SAVES_DIR, req.params.file + '.json');
+    if (!fs.existsSync(filePath)) return res.status(404).json({ error: 'not found' });
+    res.json(readJsonFile(filePath, {}));
+});
+
+// Delete a snapshot
+app.delete('/api/living/saves/:file', (req, res) => {
+    const filePath = path.join(SAVES_DIR, req.params.file + '.json');
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    res.json({ success: true });
 });
 
 app.listen(port, () => {

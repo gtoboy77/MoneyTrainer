@@ -22,3 +22,12 @@ npm-debug.log*
 # Build outputs
 dist/
 build/
+
+# User data
+data/
+
+# Claude Code
+.claude/
+
+# Misc
+nul
