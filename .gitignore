@@ -23,9 +23,6 @@ npm-debug.log*
 dist/
 build/
 
-# User data
-data/
-
 # Claude Code
 .claude/
 

@@ -1,0 +1,1396 @@
+{
+  "name": "26년 01월",
+  "transactions": [
+    {
+      "hash": "-w4ojr2",
+      "date": "26-01-31",
+      "merchant": "동일석유(주)금호주유소",
+      "amount": 70000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-yk5iji",
+      "date": "26-01-31",
+      "merchant": "메가엠지씨커피 수원매교힐스테",
+      "amount": 2400,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-yk0st0",
+      "date": "26-01-31",
+      "merchant": "메가엠지씨커피 수원매교힐스테",
+      "amount": 8800,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "h2fynb",
+      "date": "26-01-31",
+      "merchant": "태백상황버섯삼계탕수원본점",
+      "amount": 40000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-1sxmt4",
+      "date": "26-01-30",
+      "merchant": "유한책임회사동하석유 송파아이씨주유소",
+      "amount": 5000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "fweod9",
+      "date": "26-01-30",
+      "merchant": "배스킨라빈스 남위례역점",
+      "amount": 4900,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-wtp9n7",
+      "date": "26-01-30",
+      "merchant": "배부장찌개 위례점",
+      "amount": 63000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-3dd96c",
+      "date": "26-01-30",
+      "merchant": "이삭토스트 위례호반점",
+      "amount": 5300,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-vffwc6",
+      "date": "26-01-29",
+      "merchant": "(주)케이비손해보험",
+      "amount": 77183,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "4cpi3v",
+      "date": "26-01-29",
+      "merchant": "G마켓(1566-5701)",
+      "amount": 18710,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "tnvc6y",
+      "date": "26-01-29",
+      "merchant": "GSSHOP",
+      "amount": 2898,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "wci5g9",
+      "date": "26-01-29",
+      "merchant": "더제이마트 주식회사",
+      "amount": 20070,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "w1nevf",
+      "date": "26-01-29",
+      "merchant": "바른아산내과의원",
+      "amount": 620000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "srruzk",
+      "date": "26-01-29",
+      "merchant": "공차 남양주다산역점",
+      "amount": 9630,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-hsz002",
+      "date": "26-01-28",
+      "merchant": "쿠시토라",
+      "amount": 75000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "1ecsyd",
+      "date": "26-01-28",
+      "merchant": "소야소한우곱창",
+      "amount": 85000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "ch0pi7",
+      "date": "26-01-28",
+      "merchant": "(주)우아한형제들",
+      "amount": 18172,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "n459g4",
+      "date": "26-01-28",
+      "merchant": "네이버페이",
+      "amount": 13086,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-cbifji",
+      "date": "26-01-28",
+      "merchant": "섹타나인도곡지점",
+      "amount": 7300,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "htuubf",
+      "date": "26-01-28",
+      "merchant": "인천국제공항공사",
+      "amount": 10000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "4ppmkf",
+      "date": "26-01-27",
+      "merchant": "KB아파트관리비-25년12월분",
+      "amount": 473880,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-epft3o",
+      "date": "26-01-27",
+      "merchant": "김앤롤",
+      "amount": 21800,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-k365hn",
+      "date": "26-01-27",
+      "merchant": "유한회사 나이키코리아",
+      "amount": 94151,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-l1gbno",
+      "date": "26-01-27",
+      "merchant": "이엘영어전문학원",
+      "amount": 265000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-kxf5e2",
+      "date": "26-01-26",
+      "merchant": "네이버페이",
+      "amount": 16546,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "no570a",
+      "date": "26-01-26",
+      "merchant": "강정이닭",
+      "amount": 7000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "u3p22t",
+      "date": "26-01-25",
+      "merchant": "주식회사 아성다이소",
+      "amount": 22000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "yl33uk",
+      "date": "26-01-25",
+      "merchant": "젠케이위례 유한회사",
+      "amount": 126000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "7zooh7",
+      "date": "26-01-25",
+      "merchant": "(주)와이즈플래닛컴퍼니",
+      "amount": 25256,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-s5l0qy",
+      "date": "26-01-25",
+      "merchant": "안다르",
+      "amount": 55399,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "cc4ha8",
+      "date": "26-01-24",
+      "merchant": "트레이더스 위례점",
+      "amount": 329390,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-m2j5pe",
+      "date": "26-01-24",
+      "merchant": "예스이십사(주)",
+      "amount": 9450,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-7h1r22",
+      "date": "26-01-24",
+      "merchant": "쿠팡",
+      "amount": 26700,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-v4nrzf",
+      "date": "26-01-23",
+      "merchant": "안다르",
+      "amount": -57749,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "832zmu",
+      "date": "26-01-23",
+      "merchant": "알라딘",
+      "amount": 35171,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "3odv2j",
+      "date": "26-01-23",
+      "merchant": "이삭토스트 위례호반점",
+      "amount": 4100,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-42effu",
+      "date": "26-01-23",
+      "merchant": "바이핸드",
+      "amount": 21200,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "q2l4zw",
+      "date": "26-01-23",
+      "merchant": "올드몬트",
+      "amount": 18200,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "kzp291",
+      "date": "26-01-22",
+      "merchant": "(주)카카오모빌리티",
+      "amount": 35000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "73e8vq",
+      "date": "26-01-22",
+      "merchant": "주식회사 톤28",
+      "amount": 12000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-gm25cy",
+      "date": "26-01-22",
+      "merchant": "동해횟집",
+      "amount": 85000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "9sgcvn",
+      "date": "26-01-22",
+      "merchant": "비욘드잉글리쉬 남위례",
+      "amount": 190000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "9m3lbe",
+      "date": "26-01-22",
+      "merchant": "비욘드잉글리쉬 남위례",
+      "amount": 100000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-9pptxz",
+      "date": "26-01-22",
+      "merchant": "쿠팡",
+      "amount": 29900,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-qyy4hk",
+      "date": "26-01-20",
+      "merchant": "주식회사 살투스",
+      "amount": 296000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-2opdm9",
+      "date": "26-01-20",
+      "merchant": "유한회사  가락마당",
+      "amount": 65000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-bygaje",
+      "date": "26-01-20",
+      "merchant": "쿠팡",
+      "amount": 29800,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-vniuvc",
+      "date": "26-01-20",
+      "merchant": "유한회사 즐거운수산",
+      "amount": 105000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-b0483r",
+      "date": "26-01-20",
+      "merchant": "네이버페이",
+      "amount": 15979,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-wrddeg",
+      "date": "26-01-19",
+      "merchant": "맷차 용인세브란스점",
+      "amount": 4200,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "5znf9o",
+      "date": "26-01-19",
+      "merchant": "주식회사 젝시믹스",
+      "amount": 40601,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "4s57za",
+      "date": "26-01-19",
+      "merchant": "(주)시디즈",
+      "amount": 25000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "vib9gd",
+      "date": "26-01-19",
+      "merchant": "쿠팡이츠",
+      "amount": 25700,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-bh89bn",
+      "date": "26-01-19",
+      "merchant": "(주)두창주유소",
+      "amount": 89000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "w51758",
+      "date": "26-01-19",
+      "merchant": "쿠팡",
+      "amount": 14660,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "dyq6u0",
+      "date": "26-01-19",
+      "merchant": "서울특별시 주차장",
+      "amount": 800,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-pfohp6",
+      "date": "26-01-19",
+      "merchant": "SK텔레콤",
+      "amount": 29210,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-t6z0li",
+      "date": "26-01-18",
+      "merchant": "쿠팡",
+      "amount": 2950,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "g95g2p",
+      "date": "26-01-18",
+      "merchant": "위례 서울소아청소년과",
+      "amount": -176900,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-35sc2o",
+      "date": "26-01-17",
+      "merchant": "씨유 위례한빛마을점",
+      "amount": 13500,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "78yja3",
+      "date": "26-01-17",
+      "merchant": "아이파킹 주식회사",
+      "amount": 5000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-8v3lxc",
+      "date": "26-01-17",
+      "merchant": "북설악건어물할인마트",
+      "amount": 20000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "twh9pa",
+      "date": "26-01-17",
+      "merchant": "쿠팡(쿠페이)",
+      "amount": 7890,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "yha4zo",
+      "date": "26-01-16",
+      "merchant": "알라딘",
+      "amount": 31090,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "xofhn0",
+      "date": "26-01-16",
+      "merchant": "네이버페이",
+      "amount": 20740,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "p66ck9",
+      "date": "26-01-16",
+      "merchant": "헤어바이206 (HAIR BY 206)",
+      "amount": 20000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-t2h594",
+      "date": "26-01-16",
+      "merchant": "위례메디칼약국",
+      "amount": 9600,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "fmhpp4",
+      "date": "26-01-16",
+      "merchant": "네이버플러스 멤버십",
+      "amount": 10757,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "g67r7p",
+      "date": "26-01-15",
+      "merchant": "현대해상화재보험",
+      "amount": 27100,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "npihqb",
+      "date": "26-01-15",
+      "merchant": "카카오T일반택시_0",
+      "amount": 28700,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "rplk9w",
+      "date": "26-01-15",
+      "merchant": "쿠팡",
+      "amount": 40900,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "b4l1lp",
+      "date": "26-01-15",
+      "merchant": "두리이비인후과",
+      "amount": 4700,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "k1lph8",
+      "date": "26-01-15",
+      "merchant": "전통맛집할매순대국위례본점",
+      "amount": 35000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "qjyotb",
+      "date": "26-01-14",
+      "merchant": "쿠팡",
+      "amount": 27000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-ys4jmw",
+      "date": "26-01-14",
+      "merchant": "섹타나인도곡지점",
+      "amount": 10400,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-ys3tl5",
+      "date": "26-01-14",
+      "merchant": "섹타나인도곡지점",
+      "amount": 11200,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "h8wjzb",
+      "date": "26-01-14",
+      "merchant": "네이버파이낸셜(주)",
+      "amount": 14736,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "qmpejw",
+      "date": "26-01-14",
+      "merchant": "쿠팡",
+      "amount": 63580,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "qjx69t",
+      "date": "26-01-14",
+      "merchant": "쿠팡",
+      "amount": 25130,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "4afu5x",
+      "date": "26-01-13",
+      "merchant": "아이스크림살래(위례점)",
+      "amount": 21900,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "hy247u",
+      "date": "26-01-13",
+      "merchant": "주식회사 페이스토리",
+      "amount": 171000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "m8hyqo",
+      "date": "26-01-13",
+      "merchant": "네이버파이낸셜(주)",
+      "amount": 22443,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "wv1ohh",
+      "date": "26-01-13",
+      "merchant": "섹타나인도곡지점",
+      "amount": 10200,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-t4tap7",
+      "date": "26-01-13",
+      "merchant": "섹타나인도곡지점",
+      "amount": 9190,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-gwxnl4",
+      "date": "26-01-13",
+      "merchant": "CLAUDE.AI SUBSCRIPTION SAN FRANCISCO USA",
+      "amount": 16366,
+      "card": "하나카드",
+      "category": "",
+      "source": "카드이용내역.xls"
+    },
+    {
+      "hash": "65a7va",
+      "date": "26-01-12",
+      "merchant": "현대해상화재보험",
+      "amount": 94980,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "60z9xd",
+      "date": "26-01-12",
+      "merchant": "현대해상화재보험",
+      "amount": 31410,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "wu7sl5",
+      "date": "26-01-12",
+      "merchant": "두리이비인후과",
+      "amount": 6400,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "61falc",
+      "date": "26-01-12",
+      "merchant": "(주)우아한형제들",
+      "amount": 9200,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "ts2xov",
+      "date": "26-01-12",
+      "merchant": "페이레터(주)",
+      "amount": 9819,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "xlbecc",
+      "date": "26-01-12",
+      "merchant": "SK텔레콤",
+      "amount": 72020,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "r7h4qp",
+      "date": "26-01-12",
+      "merchant": "네이버파이낸셜(주)",
+      "amount": 24560,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "w6d8mc",
+      "date": "26-01-11",
+      "merchant": "네이버파이낸셜(주)",
+      "amount": 22764,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "gd0sdq",
+      "date": "26-01-11",
+      "merchant": "(주)우아한형제들",
+      "amount": 23500,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "py0gp8",
+      "date": "26-01-10",
+      "merchant": "골프존파크호계IT스크린",
+      "amount": 19000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-r6oycj",
+      "date": "26-01-10",
+      "merchant": "(주)유어네임히얼",
+      "amount": 155400,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-yxr17k",
+      "date": "26-01-10",
+      "merchant": "에프알엘코리아 주식회사",
+      "amount": 139500,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "g2byyd",
+      "date": "26-01-09",
+      "merchant": "쿠팡이츠-쿠팡이츠",
+      "amount": 50000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-7h3d0d",
+      "date": "26-01-09",
+      "merchant": "주식회사 제이엔비",
+      "amount": 32093,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "vkzxgg",
+      "date": "26-01-09",
+      "merchant": "두리이비인후과",
+      "amount": 4700,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "cbdzuo",
+      "date": "26-01-08",
+      "merchant": "베이커리 리종",
+      "amount": 27550,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-cf9pet",
+      "date": "26-01-08",
+      "merchant": "더제이마트 주식회사",
+      "amount": 34160,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-pq6rgh",
+      "date": "26-01-08",
+      "merchant": "우리동네국민반찬",
+      "amount": 10000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "m2qfw3",
+      "date": "26-01-08",
+      "merchant": "주식회사 지마켓",
+      "amount": 13380,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-5wlwvp",
+      "date": "26-01-08",
+      "merchant": "쿠팡",
+      "amount": 55170,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "cnlq02",
+      "date": "26-01-07",
+      "merchant": "위례푸른약국",
+      "amount": 36400,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-nqfmpa",
+      "date": "26-01-07",
+      "merchant": "국군복지단",
+      "amount": 127160,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "kgq112",
+      "date": "26-01-07",
+      "merchant": "(주)우아한형제들-주식회사우아한형제들",
+      "amount": 23410,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-tjnz4x",
+      "date": "26-01-07",
+      "merchant": "씨제이제일제당(주)",
+      "amount": 42295,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-gpzdor",
+      "date": "26-01-07",
+      "merchant": "수다 대치점",
+      "amount": 226000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-8p05y",
+      "date": "26-01-07",
+      "merchant": "비바리퍼블리카",
+      "amount": 6900,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-8rbzm",
+      "date": "26-01-07",
+      "merchant": "비바리퍼블리카",
+      "amount": 3880,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "6ktqif",
+      "date": "26-01-07",
+      "merchant": "효성에프엠에스(주)",
+      "amount": 1100,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-v4wrh7",
+      "date": "26-01-07",
+      "merchant": "위례 해솔정신건강의학과의원",
+      "amount": 18600,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-8pvw0",
+      "date": "26-01-07",
+      "merchant": "비바리퍼블리카",
+      "amount": 5484,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "3hns1",
+      "date": "26-01-06",
+      "merchant": "쿠팡(주)-쿠팡",
+      "amount": 18240,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-1yl0ty",
+      "date": "26-01-05",
+      "merchant": "KCP(결제대행)-네슬레코리아유한책임회사",
+      "amount": 63200,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-ittw1",
+      "date": "26-01-05",
+      "merchant": "네이버페이-㈜알라딘커뮤니케이션",
+      "amount": 52150,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "y9zch2",
+      "date": "26-01-05",
+      "merchant": "네이버파이낸셜(주)",
+      "amount": 35930,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "xuznqn",
+      "date": "26-01-05",
+      "merchant": "카카오페이손해보험-카카오페이손해보험",
+      "amount": 8500,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-14hw90",
+      "date": "26-01-04",
+      "merchant": "이마트24 단양팔경(춘천방향)휴게소점",
+      "amount": 4100,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "toebdi",
+      "date": "26-01-04",
+      "merchant": "매일여는달빛온누리약국",
+      "amount": 4500,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "7ikd8b",
+      "date": "26-01-04",
+      "merchant": "더제이마트 주식회사",
+      "amount": 63900,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "i7fux9",
+      "date": "26-01-04",
+      "merchant": "구글플레이-구글페이먼트코리아유한회사",
+      "amount": 2200,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "6xvxs8",
+      "date": "26-01-04",
+      "merchant": "하이엔소아청소년과",
+      "amount": 12800,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "hg4jor",
+      "date": "26-01-03",
+      "merchant": "카카오T대리_카카오페이-주식회사카카오",
+      "amount": 38000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "l81qy2",
+      "date": "26-01-03",
+      "merchant": "유한책임회사동하석유 송파아이씨주유소",
+      "amount": 7000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-dii6m2",
+      "date": "26-01-03",
+      "merchant": "씨유 여주번도리점",
+      "amount": 4700,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "l9jf3g",
+      "date": "26-01-03",
+      "merchant": "덕구온천개발(주)",
+      "amount": 19500,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "u6w84m",
+      "date": "26-01-03",
+      "merchant": "BBQ 덕구온천점",
+      "amount": 36000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-5vpsma",
+      "date": "26-01-03",
+      "merchant": "(주)한국오토엠",
+      "amount": 1000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-ijn541",
+      "date": "26-01-03",
+      "merchant": "씨유(CU)덕구콘도점",
+      "amount": 42800,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-5vp0w1",
+      "date": "26-01-03",
+      "merchant": "(주)한국오토엠",
+      "amount": 2000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-5vp0w1",
+      "date": "26-01-03",
+      "merchant": "(주)한국오토엠",
+      "amount": 2000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-5vp0w1",
+      "date": "26-01-03",
+      "merchant": "(주)한국오토엠",
+      "amount": 2000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-5vp0w1",
+      "date": "26-01-03",
+      "merchant": "(주)한국오토엠",
+      "amount": 2000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-ddgl6n",
+      "date": "26-01-02",
+      "merchant": "쿠팡(주)-쿠팡",
+      "amount": 57160,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-yxaku4",
+      "date": "26-01-02",
+      "merchant": "국군복지단",
+      "amount": 114200,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "1aaejf",
+      "date": "26-01-02",
+      "merchant": "(주)이마트 성남점",
+      "amount": 140730,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "a8xcdh",
+      "date": "26-01-02",
+      "merchant": "KICC(세외수입현장)-안양시청",
+      "amount": 300,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-h8inz5",
+      "date": "26-01-02",
+      "merchant": "PAYCO_NICE-에스피씨네트웍스서울지점",
+      "amount": 8500,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "he9r7d",
+      "date": "26-01-02",
+      "merchant": "더제이마트 주식회사",
+      "amount": 31860,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "cjtuw0",
+      "date": "26-01-02",
+      "merchant": "(주)파란골프",
+      "amount": 27000,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "7rj81y",
+      "date": "26-01-01",
+      "merchant": "네이버페이-유니클로온라인스토어",
+      "amount": 64406,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "-bvcq41",
+      "date": "26-01-01",
+      "merchant": "이노페이_인피니소프트_3-벗츠",
+      "amount": 29110,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "wk4lfj",
+      "date": "26-01-01",
+      "merchant": "스마일페이_알라딘-알라딘",
+      "amount": 11354,
+      "card": "KB카드",
+      "category": "",
+      "source": "202602_usage.xlsx"
+    },
+    {
+      "hash": "4j4705",
+      "date": "26-01-01",
+      "merchant": "(주)이마트",
+      "amount": 30000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-21kn7h",
+      "date": "26-01-01",
+      "merchant": "경희대한빛태권도 주식회사",
+      "amount": 320000,
+      "card": "신한카드",
+      "category": "",
+      "source": "Shinhancard_20260207214247.xls"
+    },
+    {
+      "hash": "-oy2qih",
+      "date": "26-01-01",
+      "merchant": "놀유니버스_주식회사 놀유니버스",
+      "amount": 60000,
+      "card": "롯데카드",
+      "category": "PG(오프라인)",
+      "source": "카드이용내역__20260207214959.xls"
+    }
+  ],
+  "overrides": {
+    "더제이마트 주식회사": "식대",
+    "쿠시토라": "식대",
+    "소야소한우곱창": "식대",
+    "(주)우아한형제들": "식대",
+    "섹타나인도곡지점": "생활",
+    "인천국제공항공사": "교통",
+    "김앤롤": "식대",
+    "유한회사 나이키코리아": "생활",
+    "G마켓(1566-5701)": "생활",
+    "강정이닭": "식대",
+    "젠케이위례 유한회사": "식대",
+    "(주)와이즈플래닛컴퍼니": "생활",
+    "안다르": "생활",
+    "트레이더스 위례점": "식대",
+    "예스이십사(주)": "생활",
+    "올드몬트": "식대",
+    "(주)카카오모빌리티": "교통",
+    "주식회사 톤28": "식대",
+    "동해횟집": "식대",
+    "비욘드잉글리쉬 남위례": "교육",
+    "바이핸드": "생활",
+    "주식회사 살투스": "교육",
+    "유한회사  가락마당": "식대",
+    "유한회사 즐거운수산": "식대",
+    "주식회사 젝시믹스": "생활",
+    "(주)시디즈": "생활",
+    "코스트코코리아": "식대",
+    "위례 서울소아청소년과": "의료",
+    "아이스크림살래(위례점)": "식대",
+    "주식회사 페이스토리": "생활",
+    "페이레터(주)": "생활",
+    "(주)유어네임히얼": "생활",
+    "에프알엘코리아 주식회사": "생활",
+    "주식회사 제이엔비": "생활",
+    "우리동네국민반찬": "식대",
+    "주식회사 지마켓": "생활",
+    "국군복지단": "식대",
+    "(주)우아한형제들-주식회사우아한형제들": "식대",
+    "씨제이제일제당(주)": "식대",
+    "비바리퍼블리카": "생활",
+    "KCP(결제대행)-네슬레코리아유한책임회사": "식대",
+    "구글플레이-구글페이먼트코리아유한회사": "문화",
+    "하이엔소아청소년과": "의료",
+    "덕구온천개발(주)": "식대",
+    "(주)한국오토엠": "생활",
+    "KICC(세외수입현장)-안양시청": "교통",
+    "경희대한빛태권도 주식회사": "교육"
+  },
+  "savedAt": "2026-02-08T03:40:01.068Z"
+}

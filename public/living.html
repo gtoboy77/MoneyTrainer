@@ -897,15 +897,14 @@
                     // 같은 항목 클릭 시 해제 → 빈 화면으로
                     _viewingSnapshot = null;
                     _txCache = [];
-                    _ovCache = {};
                     renderTransactions();
                     renderSaves();
                     return;
                 }
                 try {
-                    const snap = await fetch('/api/living/saves/' + file).then(r => r.json());
+                    const snap = await fetch('/api/living/saves/' + encodeURIComponent(file)).then(r => r.json());
                     _txCache = snap.transactions || [];
-                    _ovCache = snap.overrides || {};
+                    // 글로벌 오버라이드 유지 (스냅샷 오버라이드로 교체하지 않음 — 모든 장비에서 동일하게 표시)
                     _viewingSnapshot = file;
                     renderTransactions();
                     renderSaves();
@@ -920,11 +919,10 @@
                 const name = del.dataset.name;
                 if (!confirm(`"${name}" 삭제하시겠습니까?`)) return;
                 try {
-                    await fetch('/api/living/saves/' + file, { method: 'DELETE' });
+                    await fetch('/api/living/saves/' + encodeURIComponent(file), { method: 'DELETE' });
                     if (_viewingSnapshot === file) {
                         _viewingSnapshot = null;
                         _txCache = [];
-                        _ovCache = {};
                         renderTransactions();
                     }
                     renderSaves();
