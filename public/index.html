@@ -334,6 +334,11 @@
                                 code = 'GOOGL';
                                 name = 'Alphabet Inc. (GOOGL 합산)';
                             }
+                            // Special Aggregation for 삼성전자 (Samsung Electronics)
+                            else if (codeTrimmed.startsWith('삼성전자') || name.startsWith('삼성전자')) {
+                                code = '삼성전자';
+                                name = '삼성전자 (Samsung 합산)';
+                            }
 
                             if (!aggregates[code]) {
                                 aggregates[code] = {

@@ -120,7 +120,8 @@ async function scrapeEtfCheck(page, url, id, totalAmount = 0, maxItems = 0) {
         'kodex': "KODEX 미국성장커버드콜액티브",
         'wisdomtree': "WisdomTree U.S. Quality Dividend Growth Fund (DGRW)",
         'etf_mve2': "Schwab U.S. Dividend Equity ETF (SCHD)",
-        'sol_mix': "SOL 미국배당채권혼합50"
+        'sol_mix': "SOL 미국배당채권혼합50",
+        'plus_hbm': "PLUS 글로벌 HBM"
     };
     if (defaults[id]) title = defaults[id];
 
@@ -166,16 +167,38 @@ async function scrapeEtfCheck(page, url, id, totalAmount = 0, maxItems = 0) {
     }
 
     // Calculate amounts based on weight if totalAmount is provided
-    if (totalAmount > 0 && data) {
+    if (totalAmount > 0 && data && data.length > 0) {
         console.log(`[${id}] Calculating amounts with Total: ${totalAmount}`);
+
+        // First pass: calculate amounts with Math.floor()
+        let sumOfAmounts = 0;
         data = data.map(item => {
             const weight = parseFloat(item.weight);
             if (!isNaN(weight)) {
                 const calAmount = Math.floor(totalAmount * (weight / 100));
-                item.amount = calAmount.toLocaleString('ko-KR') + "원";
+                item._numericAmount = calAmount;
+                sumOfAmounts += calAmount;
+            } else {
+                item._numericAmount = 0;
             }
             return item;
         });
+
+        // Second pass: add remainder to last item
+        const remainder = totalAmount - sumOfAmounts;
+        if (remainder > 0 && data.length > 0) {
+            const lastItem = data[data.length - 1];
+            lastItem._numericAmount += remainder;
+            console.log(`[${id}] Added remainder ${remainder}원 to last item (${lastItem.code})`);
+        }
+
+        // Convert to display string
+        data = data.map(item => {
+            item.amount = item._numericAmount.toLocaleString('ko-KR') + "원";
+            delete item._numericAmount;
+            return item;
+        });
+
         title += ` (${totalAmount.toLocaleString('ko-KR')}원)`;
     }
 
@@ -343,14 +366,35 @@ const scrapers = {
 
         // Apply Custom Calculation for Capital if totalAmount exists
         if (totalAmount > 0 && data.length > 0) {
+            // First pass: calculate amounts with Math.floor()
+            let sumOfAmounts = 0;
             data = data.map(item => {
                 const weight = parseFloat(item.weight);
                 if (!isNaN(weight)) {
                     const calAmount = Math.floor(totalAmount * (weight / 100));
-                    item.amount = calAmount.toLocaleString('ko-KR') + "원";
+                    item._numericAmount = calAmount;
+                    sumOfAmounts += calAmount;
+                } else {
+                    item._numericAmount = 0;
                 }
                 return item;
             });
+
+            // Second pass: add remainder to last item
+            const remainder = totalAmount - sumOfAmounts;
+            if (remainder > 0 && data.length > 0) {
+                const lastItem = data[data.length - 1];
+                lastItem._numericAmount += remainder;
+                console.log(`[Capital] Added remainder ${remainder}원 to last item (${lastItem.code})`);
+            }
+
+            // Convert to display string
+            data = data.map(item => {
+                item.amount = item._numericAmount.toLocaleString('ko-KR') + "원";
+                delete item._numericAmount;
+                return item;
+            });
+
             title += ` (${totalAmount.toLocaleString('ko-KR')}원)`;
         }
 
@@ -367,6 +411,10 @@ const scrapers = {
     sol_mix: async (page) => {
         const total = await fetchTotalAmount('D32'); // SOL Mix
         return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/490490/compose', 'sol_mix', total);
+    },
+    plus_hbm: async (page) => {
+        const total = await fetchTotalAmount('D59'); // PLUS 글로벌 HBM
+        return scrapeEtfCheck(page, 'https://www.etfcheck.co.kr/mobile/etpitem/442580/compose', 'plus_hbm', total);
     },
     custom_googl: async (page) => {
         const total = await fetchTotalAmount('D40'); // GOOGL Direct
@@ -497,6 +545,7 @@ app.get('/api/constituents', async (req, res) => {
             runScraper(scrapers.wisdomtree, "WisdomTree"),
             runScraper(scrapers.etf_mve2, "ETF_MVE2"),
             runScraper(scrapers.sol_mix, "SOL_MIX"),
+            runScraper(scrapers.plus_hbm, "PLUS_HBM"),
             runScraper(scrapers.custom_bonds, "CUSTOM_BONDS"),
             runScraper(scrapers.custom_savings, "CUSTOM_SAVINGS"),
             runScraper(scrapers.custom_cash, "CUSTOM_CASH"),
